@@ -23,7 +23,7 @@ class SubstringTest < Minitest::Test
 
   def test_it_is_not_a_word_by_default
     substring = Substring.new('a')
-    refute substring.word?
+    refute substring.word
   end
 
   def test_it_inserts_new_substring_at_correct_link
@@ -65,6 +65,36 @@ class SubstringTest < Minitest::Test
     substring.insert('pal')
     refute substring.find('pad')
     refute substring.find('palindrome')
+  end
+
+  def test_it_inserts_word_substrings_as_words
+    substring = Substring.new('p')
+    substring.insert('pizza')
+    assert substring.find('pizza').word
+  end
+
+  def test_words_substrings_are_not_words
+    substring = Substring.new('p')
+    substring.insert('pizza')
+    refute substring.find('piz').word
+    refute substring.find('pi').word
+  end
+
+  def test_it_counts_words
+    substring = Substring.new('p')
+    substring.insert('pizzeria')
+    substring.insert('pizza')
+    substring.insert('pizzicato')
+    assert_equal 3, substring.count
+  end
+
+  def test_it_counts_itself_if_its_a_words
+    substring = Substring.new('p')
+    substring.word = true
+    substring.insert('pizzeria')
+    substring.insert('pizza')
+    substring.insert('pizzicato')
+    assert_equal 4, substring.count
   end
 
 # test remainder?

@@ -1,5 +1,6 @@
 class Substring
   attr_reader :value, :links
+  attr_accessor :word
 
   def initialize(value)
     @value = value.to_s
@@ -10,14 +11,12 @@ class Substring
     substring.sub(value, '')
   end
 
-  def word?
-    false
-  end
-
   def insert(substring)
-    unless remainder(substring).empty?
-      @links[remainder(substring)[0]] ||= Substring.new(value + remainder(substring)[0])
-      @links[remainder(substring)[0]].insert(substring)
+    remainder = remainder(substring)
+    unless remainder.empty?
+      @links[remainder[0]] ||= Substring.new(value + remainder[0])
+      @links[remainder[0]].insert(substring)
+      @links[remainder[0]].word = true if remainder.length==1
     end
   end
 
@@ -25,5 +24,10 @@ class Substring
     remainder = remainder(substring)
     return self if value == substring
     links[remainder[0]].find(substring) unless remainder.length == 0 || links[remainder[0]].nil?
+  end
+
+  def count
+    me = word ? 1 : 0
+    links.reduce(me){ |sum,element| sum + element[1].count }
   end
 end

@@ -18,6 +18,8 @@ class CompleteMeTest < Minitest::Test
     assert_equal 'b', complete_me.links['b'].value
   end
 
+  
+
   # def test_it_does_not_recognises_non_existant_words
   #   skip
   #   complete_me = CompleteMe.new
