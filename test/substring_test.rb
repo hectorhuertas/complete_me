@@ -26,4 +26,38 @@ class SubstringTest < Minitest::Test
     refute substring.word?
   end
 
+  def test_it_inserts_new_substring_at_correct_link
+    substring = Substring.new('p')
+    substring.insert('pi')
+    assert_equal 'pi', substring.links['i'].value
+  end
+
+  def test_it_inserts_other_substring_at_correct_link
+    substring = Substring.new('p')
+    substring.insert('po')
+    assert_equal 'po', substring.links['o'].value
+  end
+
+  def test_it_inserts_longer_substring_at_correct_link
+    substring = Substring.new('p')
+    substring.insert('piz')
+    assert_equal 'piz', substring.links['i'].links['z'].value
+  end
+
+  def test_if_finds_a_substring
+    skip
+    substring = Substring.new('p')
+  end
+
+  def test_it_finds_another_substring
+    skip
+    substring = Substring.new('p')
+  end
+
+  def test_it_does_not_find_a_fake_substring
+    skip
+    substring = Substring.new('p')
+  end
+
+
 end
