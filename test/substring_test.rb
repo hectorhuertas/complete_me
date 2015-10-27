@@ -45,19 +45,27 @@ class SubstringTest < Minitest::Test
   end
 
   def test_if_finds_a_substring
-    skip
     substring = Substring.new('p')
+    substring.insert('pizzeria')
+    assert_equal 'pizze', substring.find('pizze').value
+    assert_equal 'pi', substring.find('pi').value
+    assert_equal 'pizzeri', substring.find('pizzeri').value
+    assert_equal 'pizzeria', substring.find('pizzeria').value
   end
 
   def test_it_finds_another_substring
-    skip
-    substring = Substring.new('p')
+    substring = Substring.new('c')
+    substring.insert('carpool')
+    assert_equal 'car', substring.find('car').value
+    assert_equal 'carpo', substring.find('carpo').value
   end
 
   def test_it_does_not_find_a_fake_substring
-    skip
     substring = Substring.new('p')
+    substring.insert('pal')
+    refute substring.find('pad')
+    refute substring.find('palindrome')
   end
 
-
+# test remainder?
 end
