@@ -21,15 +21,19 @@ class CompleteMe
   end
 
   def count
-    links.reduce(0){|sum,element| sum + element[1].count}
+    links.reduce(0) { |sum, element| sum + element[1].count }
   end
 
   def populate(dictionary)
-    dictionary.split.each {|word| insert(word.downcase)}
+    dictionary.split.each { |word| insert(word.downcase) }
   end
 
   def suggest(hint)
     links[hint[0]].suggest(hint)
+  end
+
+  def select(substring, word)
+    find(substring).favorite(word)
   end
 end
 

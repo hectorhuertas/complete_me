@@ -1,10 +1,11 @@
 class Substring
-  attr_reader :value, :links
+  attr_reader :value, :links, :favorites
   attr_accessor :word
 
   def initialize(value)
     @value = value.to_s
     @links = {}
+    @favorites = {}
   end
 
   def remainder(substring)
@@ -43,5 +44,10 @@ class Substring
 
   def suggest(substring)
     find(substring).words
+  end
+
+  def favorite(word)
+      @favorites[word] ||= 0
+      @favorites[word] +=1
   end
 end

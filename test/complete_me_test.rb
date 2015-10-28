@@ -77,4 +77,13 @@ class CompleteMeTest < Minitest::Test
     expected = %w(super supermonkey superman)
     assert_equal expected, complete_me.suggest('su')
   end
+
+  def test_it_selects_favorite_predictions_for_a_substring
+    complete_me = CompleteMe.new
+    input = %w(b ball char super supermonkey superman salt soup)
+    input.each { |word| complete_me.insert(word) }
+    complete_me.select('su', "superman")
+    expected = {'superman' => 1}
+    assert_equal expected, complete_me.find('su').favorites
+  end
 end

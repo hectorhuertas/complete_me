@@ -112,5 +112,55 @@ class SubstringTest < Minitest::Test
     assert_equal expected, substring.words
   end
 
+  def test_it_favorites_a_word_for_a_substring
+    substring = Substring.new('su')
+    substring.favorite("superman")
+    expected = {'superman' => 1}
+    assert_equal expected, substring.favorites
+  end
+
+  def test_it_favorites_other_word_for_a_substring
+    substring = Substring.new('su')
+    substring.favorite("super")
+    expected = {'super' => 1}
+    assert_equal expected, substring.favorites
+    end
+
+  def test_it_favorites_several_words_for_a_substring
+    substring = Substring.new('su')
+    substring.favorite("super")
+    substring.favorite("superbob")
+    expected = {'super' => 1, 'superbob' =>1}
+    assert_equal expected, substring.favorites
+  end
+
+  def test_it_favorites_a_word_several_times
+    substring = Substring.new('su')
+    substring.favorite("super")
+    substring.favorite("super")
+    expected = {'super' => 2}
+    assert_equal expected, substring.favorites
+  end
+
+  def test_it_returns_favorites_in_descending_order
+    substring = Substring.new('su')
+    substring.favorite("super")
+    substring.favorite("superbob")
+    substring.favorite("superbob")
+    expected = {'superbob' =>2, 'super' => 1}
+    assert_equal expected, substring.favorites
+  end
+
+  def test_it_returns_other_favorites_in_descending_order
+    substring = Substring.new('su')
+    substring.favorite("super")
+    substring.favorite("super")
+    substring.favorite("super")
+    substring.favorite("superbob")
+    substring.favorite("superbob")
+    expected = { 'super' => 3,'superbob' =>2}
+    assert_equal expected, substring.favorites
+  end
+
 # test remainder?
 end
