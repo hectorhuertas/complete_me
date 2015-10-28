@@ -162,5 +162,16 @@ class SubstringTest < Minitest::Test
     assert_equal expected, substring.favorites
   end
 
+  def test_words_return_favorites_words_first
+    substring = Substring.new('p')
+    substring.word = true
+    substring.insert('pizzeria')
+    substring.insert('pizza')
+    substring.insert('pizzicato')
+    substring.favorite('pizza')
+    expected = %w(pizza p pizzeria pizzicato)
+    assert_equal expected, substring.words
+  end
+
 # test remainder?
 end

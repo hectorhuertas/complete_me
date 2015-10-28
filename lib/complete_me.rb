@@ -29,7 +29,8 @@ class CompleteMe
   end
 
   def suggest(hint)
-    links[hint[0]].suggest(hint)
+    # links[hint[0]].suggest(hint)
+    find(hint).words
   end
 
   def select(substring, word)

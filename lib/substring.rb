@@ -37,13 +37,11 @@ class Substring
       return [value]
     else
       me = []
-      me = [value] if word
-      links.reduce(me) { |sum, x| sum + x[1].words }
+      me = favorites.keys if !favorites.empty?
+      me << value if word
+      links.reduce(me) { |sum, x| sum + x[1].words }.uniq
+      # me.uniq
     end
-  end
-
-  def suggest(substring)
-    find(substring).words
   end
 
   def favorite(word)
