@@ -48,6 +48,11 @@ class CompleteMeTest < Minitest::Test
     refute complete_me.find('b').word
   end
 
+  def test_word_count_starts_0
+    complete_me = CompleteMe.new
+    assert_equal 0, complete_me.count
+  end
+
   def test_it_counts_words
     complete_me = CompleteMe.new
     input = %w(b ball char super supermonkey)
