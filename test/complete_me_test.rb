@@ -74,7 +74,7 @@ class CompleteMeTest < Minitest::Test
     complete_me = CompleteMe.new
     input = %w(b ball char super supermonkey superman salt soup)
     input.each { |word| complete_me.insert(word) }
-    expected = %w(super supermonkey superman salt)
+    expected = %w(super supermonkey superman)
     assert_equal expected, complete_me.suggest('su')
   end
 end

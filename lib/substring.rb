@@ -38,7 +38,10 @@ class Substring
       me = []
       me = [value] if word
       links.reduce(me) { |sum, x| sum + x[1].words }
-
     end
+  end
+
+  def suggest(substring)
+    find(substring).words
   end
 end

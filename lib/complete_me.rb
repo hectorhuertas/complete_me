@@ -29,7 +29,7 @@ class CompleteMe
   end
 
   def suggest(hint)
-    links[hint[0]].words
+    links[hint[0]].suggest(hint)
   end
 end
 
