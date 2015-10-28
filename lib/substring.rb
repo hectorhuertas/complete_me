@@ -16,7 +16,7 @@ class Substring
     unless remainder.empty?
       @links[remainder[0]] ||= Substring.new(value + remainder[0])
       @links[remainder[0]].insert(substring)
-      @links[remainder[0]].word = true if remainder.length==1
+      @links[remainder[0]].word = true if remainder.length == 1
     end
   end
 
@@ -28,6 +28,17 @@ class Substring
 
   def count
     me = word ? 1 : 0
-    links.reduce(me){ |sum,element| sum + element[1].count }
+    links.reduce(me) { |sum, element| sum + element[1].count }
+  end
+
+  def words
+    if links.empty?
+      return [value]
+    else
+      me = []
+      me = [value] if word
+      links.reduce(me) { |sum, x| sum + x[1].words }
+
+    end
   end
 end

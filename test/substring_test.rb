@@ -97,5 +97,20 @@ class SubstringTest < Minitest::Test
     assert_equal 4, substring.count
   end
 
+  def test_it_returns_single_word
+    substring = Substring.new('p')
+    substring.insert('pizza')
+    assert_equal ['pizza'], substring.words
+  end
+
+  def test_it_returns_possible_words
+    substring = Substring.new('p')
+    substring.insert('pizzeria')
+    substring.insert('pizza')
+    substring.insert('pizzicato')
+    expected = %w(pizzeria pizza pizzicato)
+    assert_equal expected, substring.words
+  end
+
 # test remainder?
 end
