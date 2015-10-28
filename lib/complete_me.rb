@@ -7,8 +7,13 @@ class CompleteMe
     @links = {}
   end
 
+  def initialize_link(letter)
+    @links[letter] ||= Substring.new(letter)
+  end
+
   def insert(word)
-    @links[word[0]] ||= Substring.new(word[0])
+    initialize_link(word[0])
+
     if word.length == 1
       links[word[0]].word = 1
     else
@@ -21,23 +26,19 @@ class CompleteMe
   end
 
   def count
-    links.reduce(0) { |sum, element| sum + element[1].count }
+    # links.reduce(0) { |sum, element| sum + element[1].count }
+    links.values.map(&:count).reduce(0,:+)
   end
 
   def populate(dictionary)
     dictionary.split.each { |word| insert(word.downcase) }
   end
 
-  def suggest(hint)
-    # links[hint[0]].suggest(hint)
-    find(hint).words
+  def suggest(substring)
+    find(substring).words
   end
 
   def select(substring, word)
     find(substring).favorite(word)
   end
 end
-
-# dictionary = File.read("/usr/share/dict/words")
-# dictionary = dictionary.split.select{|word| word == 'pizza' }
-# puts dictionary

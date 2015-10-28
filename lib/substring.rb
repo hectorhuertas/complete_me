@@ -28,19 +28,23 @@ class Substring
   end
 
   def count
-    me = word ? 1 : 0
-    links.reduce(me) { |sum, element| sum + element[1].count }
+    self_count = word ? 1 : 0
+    # links.reduce(me) { |sum, element| sum + element[1].count }
+    links.values.map(&:count).reduce(self_count,:+)
   end
 
   def words
     if links.empty?
       return [value]
     else
-      me = []
-      me = favorites.keys if !favorites.empty?
-      me << value if word
-      links.reduce(me) { |sum, x| sum + x[1].words }.uniq
+      # me = []
+      # me = favorites.keys if !favorites.empty?
+      # me << value if word
+      # links.reduce(me) { |sum, x| sum + x[1].words }.uniq
       # me.uniq
+      words = favorites.keys
+      words << value if word
+      links.values.map(&:words).reduce(words,:+).uniq
     end
   end
 
