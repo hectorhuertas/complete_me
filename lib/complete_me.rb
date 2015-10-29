@@ -26,7 +26,6 @@ class CompleteMe
   end
 
   def count
-    # links.reduce(0) { |sum, element| sum + element[1].count }
     links.values.map(&:count).reduce(0,:+)
   end
 
