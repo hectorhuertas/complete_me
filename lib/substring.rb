@@ -11,31 +11,9 @@ class Substring
     @favorites = {}
   end
 
-  def remainder(substring)
-    substring.sub(value, '')
-  end
-  #
-  # def insert(substring)
-  #   remainder = remainder(substring)
-  #   unless remainder.empty?
-  #     @links[remainder[0]] ||= Substring.new(value + remainder[0])
-  #     @links[remainder[0]].insert(substring)
-  #     @links[remainder[0]].word = true if remainder.length == 1
-  #   end
-  # end
-
-  # def insert(substring)
-  #   remainder = remainder(substring)
-  #   unless remainder.empty?
-  #     @links[remainder[0]] ||= Substring.new(value + remainder[0])
-  #     @links[remainder[0]].insert(substring)
-  #     @links[remainder[0]].word = true if remainder.length == 1
-  #   end
-  # end
-
   def find(substring)
-    remainder = remainder(substring)
     return self if value == substring
+    remainder = substring.sub(value, '')
     links[remainder[0]].find(substring) unless remainder.length == 0 || links[remainder[0]].nil?
   end
 
@@ -49,11 +27,6 @@ class Substring
     if links.empty?
       return [value]
     else
-      # me = []
-      # me = favorites.keys if !favorites.empty?
-      # me << value if word
-      # links.reduce(me) { |sum, x| sum + x[1].words }.uniq
-      # me.uniq
       words = favorites.keys
       words << value if word
       links.values.map(&:words).reduce(words,:+).uniq
