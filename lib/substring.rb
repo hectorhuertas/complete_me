@@ -1,4 +1,7 @@
+require_relative 'inserter'
+
 class Substring
+  include Inserter
   attr_reader :value, :links, :favorites
   attr_accessor :word
 
@@ -11,15 +14,24 @@ class Substring
   def remainder(substring)
     substring.sub(value, '')
   end
+  #
+  # def insert(substring)
+  #   remainder = remainder(substring)
+  #   unless remainder.empty?
+  #     @links[remainder[0]] ||= Substring.new(value + remainder[0])
+  #     @links[remainder[0]].insert(substring)
+  #     @links[remainder[0]].word = true if remainder.length == 1
+  #   end
+  # end
 
-  def insert(substring)
-    remainder = remainder(substring)
-    unless remainder.empty?
-      @links[remainder[0]] ||= Substring.new(value + remainder[0])
-      @links[remainder[0]].insert(substring)
-      @links[remainder[0]].word = true if remainder.length == 1
-    end
-  end
+  # def insert(substring)
+  #   remainder = remainder(substring)
+  #   unless remainder.empty?
+  #     @links[remainder[0]] ||= Substring.new(value + remainder[0])
+  #     @links[remainder[0]].insert(substring)
+  #     @links[remainder[0]].word = true if remainder.length == 1
+  #   end
+  # end
 
   def find(substring)
     remainder = remainder(substring)

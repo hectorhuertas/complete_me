@@ -91,4 +91,5 @@ class CompleteMeTest < Minitest::Test
     expected = {'superman' => 1}
     assert_equal expected, complete_me.find('su').favorites
   end
+
 end
