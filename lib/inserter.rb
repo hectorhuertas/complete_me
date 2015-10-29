@@ -9,6 +9,10 @@ module Inserter
     insert_substring
   end
 
+  def create_node
+    @links[letter] ||= Substring.new(value + letter)
+  end
+
   def insert_substring
     if inserting_word?
       mark_as_word
@@ -33,7 +37,4 @@ module Inserter
     links[letter].word = true
   end
 
-  def create_node
-    @links[letter] ||= Substring.new(value + letter)
-  end
 end
