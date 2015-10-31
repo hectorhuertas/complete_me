@@ -19,22 +19,21 @@ class Substring
 
   def count
     self_count = word ? 1 : 0
-    # links.reduce(me) { |sum, element| sum + element[1].count }
-    links.values.map(&:count).reduce(self_count,:+)
+    links.values.map(&:count).reduce(self_count, :+)
   end
 
   def words
     if links.empty?
       return [value]
     else
-      words = favorites.keys
+      words = favorites.sort_by { |_substring, count| -count }.map { |substring, _count| substring }
       words << value if word
-      links.values.map(&:words).reduce(words,:+).uniq
+      links.values.map(&:words).reduce(words, :+).uniq
     end
   end
 
   def favorite(word)
-      @favorites[word] ||= 0
-      @favorites[word] +=1
+    @favorites[word] ||= 0
+    @favorites[word] += 1
   end
 end
