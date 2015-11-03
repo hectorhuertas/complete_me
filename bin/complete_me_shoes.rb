@@ -1,4 +1,5 @@
-require_relative '../lib/complete_me'
+require '../lib/complete_me'
+
 Shoes.app {
   complete_me = CompleteMe.new
   dictionary = File.read('/usr/share/dict/words')
